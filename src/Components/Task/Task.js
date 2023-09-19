@@ -1,24 +1,13 @@
 import './Task.css';
 import { formatDistanceToNow } from 'date-fns';
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Task extends Component {
 
-  // state = {
-  //   done: false
-  // };
-
-  // onLabelClick = () => {
-  //   this.setState(({done}) => {
-  //     return {
-  //       done: !done
-  //     }
-  //   });
-  // }
   render() {
     const { description, created, onDeleted, onToggleDone, done } = this.props;
-    const distanceToNow = formatDistanceToNow(new Date(created));
-    // const { done } = this.state;
+    const distanceToNow = formatDistanceToNow(new Date(created), { includeSeconds: true });
 
     let classNames = 'description';
     if(done) {
@@ -28,7 +17,7 @@ export default class Task extends Component {
     }
 
     return (
-      <li>
+      <div className="task">
         <div className="view">
           <input 
           className="toggle" 
@@ -40,7 +29,7 @@ export default class Task extends Component {
             onClick={ onToggleDone }>
               {description}
               </span>
-            <span className="created">создано {distanceToNow} назад</span>
+            <span className="created">created  {distanceToNow} ago</span>
           </label>
           <button className="icon icon-edit"></button>
           <button 
@@ -48,7 +37,21 @@ export default class Task extends Component {
           onClick={onDeleted}
           ></button>
         </div>
-      </li>
+      </div>
     );
   }
 }
+
+Task.defaultProps = {
+  done: false,
+  onDeleted: () => {},
+  onToggleDone: () => {},
+};
+
+Task.propTypes = {
+  description: PropTypes.string.isRequired,
+  created: PropTypes.instanceOf(Date).isRequired,
+  onDeleted: PropTypes.func,
+  onToggleDone: PropTypes.func,
+  done: PropTypes.bool,
+};

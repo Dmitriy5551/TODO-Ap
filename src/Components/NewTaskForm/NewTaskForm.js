@@ -1,5 +1,6 @@
 import './NewTaskForm.css';
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class NewTaskForm extends Component {
 
@@ -26,7 +27,7 @@ export default class NewTaskForm extends Component {
         <form onSubmit={this.onSubmit}>
           <input className="new-todo" 
           placeholder="What needs to be done?" 
-          autofocus
+          autoFocus
           onChange={this.onDescriptionChange}
           value={this.state.description}
           />
@@ -35,3 +36,11 @@ export default class NewTaskForm extends Component {
     );
   }
 }
+
+NewTaskForm.defaultProps = {
+  onItemAdded: () => {},
+};
+
+NewTaskForm.propTypes = {
+  onItemAdded: PropTypes.func,
+};

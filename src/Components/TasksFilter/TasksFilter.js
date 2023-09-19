@@ -1,6 +1,7 @@
 import './TasksFilter.css';
+import PropTypes from 'prop-types';
 
-function TasksFilter({ currentFilter, onFilterChange }) {
+function TasksFilter({ onFilterChange }) {
   return (
     <ul className="filters">
       <li>
@@ -16,5 +17,12 @@ function TasksFilter({ currentFilter, onFilterChange }) {
   );
 }
 
+TasksFilter.defaultProps = {
+  onFilterChange: () => {}
+};
+
+TasksFilter.propTypes = {
+  onFilterChange: PropTypes.func
+};
 
 export default TasksFilter;

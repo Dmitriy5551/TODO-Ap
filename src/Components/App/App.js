@@ -3,6 +3,7 @@ import TaskList from '../TaskList';
 import Footer from '../Footer';
 import './App.css';
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class App extends Component {
 
@@ -111,3 +112,13 @@ export default class App extends Component {
     );
   }
 }
+
+App.defaultProps = {
+  tasks: [],
+  filter: 'All',
+};
+
+App.propTypes = {
+  tasks: PropTypes.arrayOf(PropTypes.object),
+  filter: PropTypes.string,
+};
